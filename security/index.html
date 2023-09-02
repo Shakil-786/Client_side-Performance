@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Cypress Test Runner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #output {
+            margin-top: 20px;
+            color: white;
+            font-weight: 600px;
+        }
+        h1
+        {
+            color: white;
+            font-weight: 800px;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(210, 212, 234);background-image: url('../picture/abc.png'); background-size: cover">
+    <div class="container" style ="margin-top: 130px;">
+        <h1 class="mb-4",> Identifying Sensitive Data </h1>
+        <div class="form-group">
+            <!-- <label for="urlInput">Enter URL:</label> -->
+            <input type="text" class="form-control" id="urlInput" placeholder="ENTER URL">
+            <br>
+            <input type="text" class="form-control" id="requirements" placeholder="Enter terms to be searched" style="display: none;">
+        </div>
+        <span style="display: flex;">
+            <button class="btn btn-primary mt-3" id="runButton" style="margin-right: 20px;">Check</button>
+            <button class="btn btn-success mt-3" id="seeResults" style="display: none; margin-right: 20px;">See Result</button>
+            <button class="btn btn-success mt-3" id="search" >Custom Search</button>
+        </span>
+        <div id="output" class="mt-4" ></div>
+    </div>
+    <script>
+        document.getElementById('runButton').addEventListener('click', async () => {
+            const url = document.getElementById('urlInput').value;
+            const terms=document.getElementById('requirements').value;
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>';
+            const response = await fetch('http://localhost:3000/run-cypress', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({url,terms})
+            });
+            document.getElementById('requirements').style.display='none'
+            document.getElementById('search').style.display='none'
+            if (response?.ok) {
+                outputDiv.innerHTML = '';
+                document.getElementById('seeResults').style.display = 'block';
+            }
+        });
+        document.getElementById('search').addEventListener('click',async () =>{
+            document.getElementById('requirements').style.display='block'
+        })
+        document.getElementById('seeResults').addEventListener('click', async () => {
+            let fileSizeKB,fileSizeKB1
+            try {
+                const response = await fetch('http://localhost:3000/localStorage-data-read');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log(data)
+                const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+                const fileSizeBytes = blob.size;
+                 fileSizeKB = fileSizeBytes / 1024;
+                }
+                catch (error) {
+                    console.error('Error fetching JSON:', error);
+                }
+                
+            try {
+                const response = await fetch('http://localhost:3000/sessionStorage-data-read');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log(data)
+                const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+                const fileSizeBytes = blob.size;
+                 fileSizeKB1 = fileSizeBytes / 1024;
+                 console.log(fileSizeKB1);
+                }
+                catch (error) {
+                    console.error('Error fetching JSON:', error);
+                }
+                
+            try {
+                const response = await fetch('http://localhost:3000/output-read');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log(data);
+                const value = data.intValue;
+                const upperCaseArray = value.map(item => item.toUpperCase());
+                const combinedText = upperCaseArray.join(', ')
+                if (value.length > 0) {
+                    const text = ('THE WEBSITE IS NOT SECURE. IT CONTAINS ' + combinedText +' .' )
+                    // console.log('');
+                    document.getElementById('output').append(text)
+                }
+                else {
+                    const text = 'WEBSITE IS SECURE.'
+                    document.getElementById('output').append(text)
+                }
+            } catch (error) {
+                console.error('Error fetching JSON:', error);
+            }
+            const text=("Maximum limit of Local storage is 10 MB and your storage contains " + fileSizeKB.toFixed(2) + " KB. ")
+                document.getElementById('output').append(text)
+                console.log(text);
+            const text1=("Maximum limit of Session storage is 10 MB and your storage contains " + fileSizeKB1.toFixed(2) + " KB. ")
+                document.getElementById('output').append(text1)
+                console.log(text1);
+            document.getElementById('seeResults').style.display = 'none'
+            document.getElementById('search').style.display='block'
+        });
+    </script>
+</body>
+</body>
+
+</html>

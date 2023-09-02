@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lightHouse </title>
+    <!-- Include Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link href="index.css" rel="stylesheet"/>
+    
+    <style>
+      body {
+        background: url("https://web-dev.imgix.net/image/1L2RBhCLSnXjCnSlevaDjy3vba73/6GPqQDYxZnVq8qF6DJ02.jpeg?auto=format")
+          center center/cover no-repeat fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h2 class="text-center mb-4">LightHouse</h2>
+          <span class="search">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="textInput"
+                placeholder="Enter URL"
+              />
+          </div>
+              <button id="runButton">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+        </span>
+      
+          
+            <span class="output--div" id="output--div">
+              
+              <button id='openButton' class="btn btn-primary btn-lg" >Open HTML Report</button>
+              <button  class="btn btn-primary btn-lg" id="download--json">Download Json</button>
+
+              <div class="field--div" id="field--div">
+                <div class="dropdown" id="dropdown">
+                  <!-- <label for="fields">Choose a Field:</label> -->
+                  <select class="form-select" name="fields" id="fields">
+                    <option value="none" selected="selected" >Options </option>
+                    <option value="performance">Performance</option>
+                    <option value="accessibility">Accessibility</option>
+                    <option value="best-practices">Best Practices</option>
+                    <option value="seo">SEO</option>
+                    <option value="pwa">PWA</option>
+                    <option value="all">ALL</option>
+                  </select>
+                </div>
+              </div>
+            </span>
+            
+            <div id="field-output"></div>
+            <div id="output"></div>
+          
+          <div id="errorMessage" style="display:none;">Invalid URL</div>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+    <div class="loader-container" id="loaderContainer">
+      <div class="loader"></div>
+    </div>
+  </body>
+</html>
