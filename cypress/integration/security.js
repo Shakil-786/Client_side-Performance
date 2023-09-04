@@ -21,8 +21,8 @@ describe('visit site', () => {
     cy.visit(baseurl)
     // cy.xpath("//*[@class='css-901oao'][1]").click()
     // cy.xpath("//div[text()='India']").click()
-    // cy.get('input[type="text"]').type('7001065588')
-    // cy.get('input[type="password"]').type('1234')
+    // cy.get('input[type="text"]').type('')
+    // cy.get('input[type="password"]').type('')
     // cy.xpath("(//div[text()='Login'])[2]").click()
     cy.window().then((win) => {
       let param = []
