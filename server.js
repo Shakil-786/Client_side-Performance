@@ -26,7 +26,7 @@ app.post('/run-lighthouse', (req, res) => {
   const url = req.body.url;
   const fullUrl =/^(https?:\/\/)/.test(url) ? url : `https://${url}`;
   const parsedUrl = new URL(fullUrl);
-  const command = `lighthouse ${parsedUrl} --quiet --chrome-flags="--headless" --output=html,json --output-path=C:/Users/nineleaps/Documents/phase2/client_side/reports/report`;
+  const command = `lighthouse ${parsedUrl} --quiet --chrome-flags="--headless" --output=html,json --output-path=client_side/reports/report`;
   let respo = res;
 
   exec(command, (error, stdout, stderr) => {
@@ -45,7 +45,7 @@ app.post('/run-lighthouse', (req, res) => {
 app.get('/download-report', (req, res) => {
 
   const sourceFilePath = 'reports/report.report.json';
-  const destinationFolderPath = 'C:/Users/nineleaps/Downloads';
+  const destinationFolderPath = 'C:/Users/nineleaps/Downloads';//give your local download path
   const fileName = basename(sourceFilePath);
 const destinationFilePath = join(destinationFolderPath, fileName);
   readFile(sourceFilePath, (err, data) => {
@@ -85,7 +85,7 @@ app.get('/jsondata-read', (req, res) => {
 
 app.post('/run-cypress', (req, res) => {
     const url = req.body.url;
-    const envFilePath = 'C:/Users/nineleaps/Documents/phase2/client_side/cypress/fixtures/example.json'
+    const envFilePath = 'cypress/fixtures/example.json'
     const envFileContent = readFileSync(envFilePath, 'utf8');
     const updatedEnvFileContent = envFileContent.replace(
         /"CYPRESS_BASE_URL":\s*".*"/,
@@ -95,7 +95,7 @@ app.post('/run-cypress', (req, res) => {
     const terms = req.body.terms
 const valuesToCheck = terms.split(',');
 // console.log(valuesToCheck)
-const envFilePath1 = 'C:/Users/nineleaps/Documents/phase2/client_side/cypress/fixtures/example1.json';
+const envFilePath1 = 'cypress/fixtures/example1.json';
 const envFileContent1 = readFileSync(envFilePath1, 'utf8');
 const parsedEnvFileContent1 = JSON.parse(envFileContent1);
 

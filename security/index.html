@@ -123,10 +123,10 @@
             } catch (error) {
                 console.error('Error fetching JSON:', error);
             }
-            const text=("Maximum limit of Local storage is 10 MB and your storage contains " + fileSizeKB.toFixed(2) + " KB. ")
+            const text=("          Maximum limit of Local storage is 10 MB and your storage contains " + fileSizeKB.toFixed(2) + " KB. ")
                 document.getElementById('output').append(text)
                 console.log(text);
-            const text1=("Maximum limit of Session storage is 10 MB and your storage contains " + fileSizeKB1.toFixed(2) + " KB. ")
+            const text1=("         Maximum limit of Session storage is 10 MB and your storage contains " + fileSizeKB1.toFixed(2) + " KB. ")
                 document.getElementById('output').append(text1)
                 console.log(text1);
             document.getElementById('seeResults').style.display = 'none'

@@ -40,7 +40,7 @@
     <h1>URL Checker</h1>
     <div id="body">
         <input type="text" id="urlInput" placeholder="Enter Url">
-        <input type="text" id="timeInterval" placeholder="Time interval"
+        <input type="text" id="timeInterval" placeholder="Time interval (min)"
             style="display: none; margin-left: 360px; margin-top: 20px; width: 60rem;">
         <p id="resultMessage"></p>
     </div>
@@ -130,6 +130,8 @@
         document.getElementById('stop').addEventListener('click', () => {
             clearInterval(intervalId)
             console.log('clicking on stopbutton');
+            document.getElementById('stop').style.display='none'
+            document.getElementById('')
         })
         document.getElementById('openUrlButton').addEventListener('click', () => {
 
