@@ -3,44 +3,71 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // DOM elements
-  const runButton = document.getElementById('runButton');
+  const runButton = document.getElementById('runButton1');
   const textInput = document.getElementById('textInput');
   const openButton = document.getElementById('openButton');
-  const loaderContainer = document.getElementById('loaderContainer');
+  const iframe = document.getElementById('iframe');
+  const loaderContainer = document.getElementById('loader-Container');
   const errorMessage = document.getElementById('errorMessage');
   const fieldDiv = document.getElementById('field--div');
   const fields = document.getElementById('fields');
   const outputElement = document.getElementById('field-output');
   const downloadJson = document.getElementById('download--json')
   const dropDown = document.getElementById('dropdown')
-  const outputDiv = document.getElementById('output--div')
   const table = document.getElementById('output')
+  const btnGroup = document.querySelector('.btn-group')
+  const section2 = document.querySelector('.section2')
   // Click event listener for the "Run" button
+
+  fieldDiv.style.visibility = 'hidden'
+  table.style.visibility = 'hidden';
+  btnGroup.style.visibility='hidden'
+  iframe.style.visibility='hidden'
+  section2.style.display = 'none'
+
   runButton.addEventListener('click', async () => {
     const url = textInput.value;
 
     // Reset all elements and values related to previous search
-    openButton.style.display = 'none';
     errorMessage.style.display = 'none';
-    outputElement.style.display = 'none';
-    table.style.display = 'none';
-    downloadJson.style.display = 'none';
-    fieldDiv.style.display = 'none';
+    table.style.visibility = 'hidden';
+    btnGroup.style.visibility='hidden'
+
     fields.value = 'none'; // Reset the dropdown to the default value
+    if (!url ) {
+      alert('Please enter a URL');
+      return;
+  }
     if (url) {
-      const response = await sendRequestToServer(url);
-      const isSuccess = response?.ok || false;
-
-      openButton.style.display = isSuccess ? 'inline-block' : 'none';
-      errorMessage.style.display = isSuccess ? 'none' : 'inline-block';
-      fieldDiv.style.display = isSuccess ? 'inline-block' : 'none';
-      downloadJson.style.display = isSuccess ? 'inline-block' : 'none'
-      dropDown.style.display = isSuccess ? 'inline-block' : 'none'
-      outputDiv.style.display = isSuccess ? 'inline-block' : 'none'
-
-      // Clear the previous table content
-      outputElement.innerHTML = '';
-      table.innerHTML='';
+      if (/^(?![A-Za-z]+$)[0-9\s!@#$%^&*()_+[\]{};:'",.<>?]*$|\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b|^$/.test(url)) {
+        errorMessage.innerHTML = '<div class="alert alert-danger" style="min-width: 400px;" role="alert">Invalid URL input. Please enter a valid URL.</div>';
+        errorMessage.style.display = 'inline-block';
+        loaderContainer.style.visibility='hidden'
+    }
+    if (/^[A-Za-z]+$/.test(url)) {
+      errorMessage.innerHTML = '<div class="alert alert-danger" style="min-width: 400px;" role="alert">Invalid URL input. Please enter a valid URL.</div>';
+      errorMessage.style.display = 'inline-block';
+  }
+    
+      else{
+        const response = await sendRequestToServer(url);
+        const isSuccess = response?.ok || false;
+        // console.log(response.status)
+        // if(response.status===500){
+        //   errorMessage.style.display = 'block'
+        // }
+        
+        btnGroup.style.visibility = isSuccess ? 'visible' : 'hidden';
+        errorMessage.style.display = isSuccess ? 'none' : 'inline-block';
+        fieldDiv.style.visibility = isSuccess ? 'visible' : 'hidden';
+        dropDown.style.visibility = isSuccess ? 'visible' : 'hidden'
+        section2.style.display = isSuccess ? 'block' : 'none'
+        // Clear the previous table content
+        outputElement.innerHTML = '';
+        table.innerHTML='';
+        outputElement.style.visibility="hidden"
+        loadDynamicPage();
+      }
     }
   });
 
@@ -55,20 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const val = fields.value;
 
       if (val === "all") {
-
+          
         const tableHTML = generateTable(data.categories);
         table.innerHTML = tableHTML;
-        table.style.display = "block"
+        table.style.visibility = "visible"
         outputElement.style.display="none"
       }
       else if (val === "none") {
-        outputElement.style.display = "none"
-        table.style.display = "none"
+        outputElement.style.visibility = "hidden"
+        table.style.visibility = "hidden"
+        outputElement.style.visibility = "hidden"
       }
       else {
-        table.style.display = "none"
-        outputElement.style.display = 'block'
-        outputElement.innerHTML = val === "none" ? "output--table." : (Number.isInteger(data.categories[val].score * 100) ? (data.categories[val].score * 100) : (data.categories[val].score * 100).toFixed(1));
+        table.style.visibility = "hidden"
+        outputElement.style.display="block"
+        outputElement.style.visibility = "visible"
+        outputElement.innerHTML = val === "none" ? "output--table." : `Your score : ${(Number.isInteger(data.categories[val].score * 100) ? (data.categories[val].score * 100) : (data.categories[val].score * 100).toFixed(1))} `;
 
       }
     } catch (error) {
@@ -87,17 +116,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tableHTML += '</tbody></table>';
     return tableHTML;
-
   }
+  
 
   // Input event listener for the text input
-  textInput.addEventListener('input', () => {
-    openButton.style.display = 'none';
+    textInput.addEventListener('input', () => {
+    btnGroup.style.visibility = "hidden"
     errorMessage.style.display = 'none';
-    outputElement.style.display = 'none';
-    table.style.display = 'none';
-    downloadJson.style.display = 'none';
-    fieldDiv.style.display = 'none'
+    section2.style.display = 'none';
+    table.style.visibility = 'hidden';
+    fieldDiv.style.visibility = 'hidden'
+    iframe.style.visibility = 'hidden'
   });
 
   textInput.addEventListener('keyup', (event) => {
@@ -106,12 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
       fields.value = 'none';
 
     }
-
   });
 
   // Click event listener for the "Open" button
   openButton.addEventListener('click', () => {
-    window.open('../reports/report.report.html', '_blank');
+    iframe.style.visibility="visible"
   });
 
   // Click event listener for the "download Json" button
@@ -131,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to send a request to the server
   async function sendRequestToServer(url) {
+
     try {
       loaderContainer.style.display = 'block';
       const response = await fetch('http://localhost:3000/run-lighthouse', {
@@ -140,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify({ url }),
       });
-
+     console.log(response)
       if (response.ok) {
         console.log('Lighthouse command sent to the server.');
       }
@@ -155,3 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+
+function loadDynamicPage() {
+  // Generate a random query parameter to force the browser to reload the iframe
+  const randomQueryParam = Math.random();
+  // Get a reference to the iframe element
+  const iframe = document.getElementById("iframe");
+  // Set the src attribute of the iframe with the random query parameter
+  iframe.src = "../reports/reports.report.html?random=" + randomQueryParam;
+}

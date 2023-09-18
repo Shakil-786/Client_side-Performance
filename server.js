@@ -21,12 +21,12 @@ app.get('/', (req, res) => {
 import { readFile, writeFile, readFileSync, writeFileSync } from 'fs';
 import { basename, join } from 'path';
 
-app.post('/run-lighthouse', (req, res) => {
+app.post('/run-lighthouse', (req,res) => {
 
   const url = req.body.url;
   const fullUrl =/^(https?:\/\/)/.test(url) ? url : `https://${url}`;
   const parsedUrl = new URL(fullUrl);
-  const command = `lighthouse ${parsedUrl} --quiet --chrome-flags="--headless" --output=html,json --output-path=client_side/reports/report`;
+  const command = `lighthouse ${parsedUrl} --quiet --chrome-flags="--headless" --output=html,json --output-path=./reports/reports`;
   let respo = res;
 
   exec(command, (error, stdout, stderr) => {
@@ -35,7 +35,6 @@ app.post('/run-lighthouse', (req, res) => {
       res.status(500).send('Error executing Lighthouse command.');
       return;
     }
-
     console.log('Lighthouse command executed successfully:', stdout);
     res.status(200).send('Lighthouse command executed successfully.');
     
@@ -44,7 +43,7 @@ app.post('/run-lighthouse', (req, res) => {
 
 app.get('/download-report', (req, res) => {
 
-  const sourceFilePath = 'reports/report.report.json';
+  const sourceFilePath = './reports/reports.report.json';
   const destinationFolderPath = 'C:/Users/nineleaps/Downloads';//give your local download path
   const fileName = basename(sourceFilePath);
 const destinationFilePath = join(destinationFolderPath, fileName);
@@ -67,7 +66,7 @@ if (err) {
 
 
 app.get('/jsondata-read', (req, res) => {
-  readFile('./reports/report.report.json', 'utf8', (err, data) => {
+  readFile('./reports/reports.report.json', 'utf8', (err, data) => {
       if (err) {
           console.error('Error reading JSON file:', err);
           res.status(500).json({ error: 'Error reading JSON file' });
@@ -85,6 +84,7 @@ app.get('/jsondata-read', (req, res) => {
 
 app.post('/run-cypress', (req, res) => {
     const url = req.body.url;
+    console.log(url)
     const envFilePath = 'cypress/fixtures/example.json'
     const envFileContent = readFileSync(envFilePath, 'utf8');
     const updatedEnvFileContent = envFileContent.replace(
@@ -110,7 +110,7 @@ console.log('File updated successfully.');
 
     writeFileSync(envFilePath, updatedEnvFileContent);
 
-    const cypressCommand = `npx cypress run`;
+    const cypressCommand = `npx cypress open`;
     
     exec(cypressCommand, (error, stdout, stderr) => {
         if (error) {
@@ -243,11 +243,6 @@ app.post('/check_URL', async (req, res) => {
     res.status(500).send(error)
   }
 });
-
-
-
-
-
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

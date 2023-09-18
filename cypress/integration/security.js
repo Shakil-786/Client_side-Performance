@@ -13,6 +13,7 @@ describe('visit site', () => {
   })
   it(' security', () => {
     const baseurl = data.CYPRESS_BASE_URL
+    // const baseurl ='https://pda-stage.socion.io/new/iam/login'
     const terms = data1.TERMS
     for (let i = 0; i < terms.length; i++) {
       terms[i] = `${terms[i]}`;
@@ -26,11 +27,15 @@ describe('visit site', () => {
     // cy.xpath("(//div[text()='Login'])[2]").click()
     cy.window().then((win) => {
       let param = []
+      let valuesToCheck = [ 'email', 'cardDetails','password','phoneNumber'];
+      valuesToCheck.push(...terms);
+      cy.log(valuesToCheck)
       for (let i = 0; i < win.localStorage.length; i++) {
         const key = win.localStorage.key(i);
         const value = win.localStorage.getItem(key);
         // const valuesToCheck = terms;
-        const valuesToCheck = [ 'email', 'cardDetails','password','phoneNumber'];
+
+        
         for (let i = 0; i < valuesToCheck.length; i++) {
           if (value.includes(valuesToCheck[i]) || key.includes(valuesToCheck[i])) {
             if (!param.includes(valuesToCheck[i])) {
@@ -38,7 +43,8 @@ describe('visit site', () => {
             }
           }
         }
-        cy.log(param)
+        
+        // cy.log(param)
         if (i === 0) {
           cy.request({
             method: 'POST',
@@ -53,8 +59,7 @@ describe('visit site', () => {
       for (let i = 0; i < win.sessionStorage.length; i++) {
         const key = win.sessionStorage.key(i);
         const value = win.sessionStorage.getItem(key);
-        const valuesToCheck = [ 'email', 'cardDetails','password','phoneNumber'];
-        // const valuesToCheck = terms.split(',').map(item => `'${item}'`);
+        // const valuesToCheck = [ 'email', 'cardDetails','password','phoneNumber'];
         // const valuesToCheck = terms
         // cy.log(valuesToCheck)
         for (let i = 0; i < valuesToCheck.length; i++) {
@@ -76,6 +81,8 @@ describe('visit site', () => {
           });
         }
       }
+      valuesToCheck = valuesToCheck.filter(item => !terms.includes(item));
+      cy.log(valuesToCheck)
       const data = {
         intValue: param
       };

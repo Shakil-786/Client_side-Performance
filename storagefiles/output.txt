@@ -1,1 +1,1 @@
-{"intValue":["email","phoneNumber"]}
+{"intValue":["csm-hit"]}

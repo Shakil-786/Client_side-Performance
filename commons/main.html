@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <section class="top-nav">
+      <div class="company">WebProbe</div>
+      <input id="menu-toggle" type="checkbox" />
+      <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+      </label>
+      <ul class="menu">
+        <li><a  onclick="openAccordion(1)" style="cursor: pointer;">Lighthouse</a></li>
+        <li><a  onclick="openAccordion(2)" style="cursor: pointer;">Security</a></li>
+        <li><a  onclick="openAccordion(3)" style="cursor: pointer;">Validity</a></li>
+      </ul>
+    </section>
+    <div class="section1">
+      <div class="hero">
+        <div class="hero--title">
+          <h1 class="hero--title--text">The ultimate web analysis arsenal</h1>
+        </div>
+        <div class="hero--title--description">
+          <p class="page--description">
+            We specialize in generating detailed reports for provided URLs,
+            encompassing sensitive data assessment and security validation.
+          </p>
+        </div>
+      </div>
+      <img class="image" src="../picture/security-cartoon-proof-1.jpg" />
+    </div>
+    <div class="section2">
+      <div class="lighthouse">
+        <p class="lighthouse--text">
+          We offer website performance reports powered by Lighthouse on our
+          site, ensuring your webpages are optimized for peak performance.
+        </p>
+        <div class="vline1"></div>
+        <button class="lighthouse--btn" id="openBlankPage1" onclick="openAccordion(1)">
+          <img class="lighthouse--img" src="../picture/lighthouseR.jpg" />
+        </button>
+      </div>
+      <div class="security">
+        <button class="security--btn" id="openBlankPage2" onclick="openAccordion(2)">
+          <img class="security--img" src="../picture/security-lock2.jpg" />
+        </button>
+        <div class="vline2"></div>
+        <p class="security--text">
+          We assess websites for potential confidential information exposure,
+          ensuring your data stays secure, based on the provided URL.
+        </p>
+      </div>
+      <div class="validity">
+        <p class="validity--text">
+          We monitor website uptime, with customizable time intervals, and send
+          email alerts if the site goes offline, ensuring continuous online
+          presence.
+        </p>
+        <div class="vline3"></div>
+        <button class="validity--btn" id="openBlankPage3" onclick="openAccordion(3)">
+          <img class="validity--img" src="../picture/validity-image.jpg" />
+        </button>
+      </div>
+    </div>
+    <script>
+      // Function to handle the click event on navigation links
+      // function handleNavLinkClick(event) {
+      //   event.preventDefault();
+      //   const sectionId = this.getAttribute("data-section");
+      //   window.open(`mm.html?section=${sectionId}`, "_blank");
+      // }
+      // // Add click event listeners to the navigation links
+      // const links = document.querySelectorAll("ul.menu li a");
+      // links.forEach((link) => {
+      //   link.addEventListener("click", handleNavLinkClick);
+      // });
+    </script>
+    <script>
+      // JavaScript code to open a blank page when the button is clicked
+      // document
+      //   .getElementById("openBlankPage1")
+      //   .addEventListener("click", function () {
+      //     window.open("mm.html", "_blank");
+      //   });
+      //   document
+      //   .getElementById("openBlankPage2")
+      //   .addEventListener("click", function () {
+      //     window.open("mm.html", "_blank");
+      //   });
+      //   document
+      //   .getElementById("openBlankPage3")
+      //   .addEventListener("click", function () {
+      //     window.open("mm.html", "_blank");
+      //   });
+    </script>
+    <script>
+       function openAccordion(itemNumber) {
+            window.location.href = `test.html?section=${itemNumber}`;
+        }
+      // Function to handle the click event on navigation links
+      // function handleNavLinkClick(event) {
+      //   event.preventDefault();
+      //   const sectionId = this.getAttribute("data-section");
+      //   window.open(`mm.html?section=${sectionId}`, "_blank");
+      // }
+      // // Add click event listeners to the navigation links
+      // const linkss = document.querySelectorAll("ul.menu li a");
+      // linkss.forEach((link) => {
+      //   link.addEventListener("click", handleNavLinkClick);
+      // });
+      // // JavaScript code to open a blank page when the button is clicked
+      // document
+      //   .getElementById("openBlankPage")
+      //   .addEventListener("click", function () {
+      //     window.open("about:blank", "_blank");
+      //   });
+    </script>
+    <footer>
+      <small style="color: white"
+        >©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        Nineleaps. All Rights Reserved.</small
+      >
+    </footer>
+  </body>
+</html>

@@ -46,24 +46,53 @@
         <div id="output" class="mt-4" ></div>
     </div>
     <script>
+        document.getElementById('urlInput').addEventListener('keyup', (event) => {
+        if (event.key === "Enter") {
+            document.getElementById('runButton').click();
+        }
+        });
         document.getElementById('runButton').addEventListener('click', async () => {
-            const url = document.getElementById('urlInput').value;
-            const terms=document.getElementById('requirements').value;
-            const outputDiv = document.getElementById('output');
+        const urlInputField = document.getElementById('urlInput');
+        const urlInput = document.getElementById('urlInput').value.trim(); // Trim to remove leading/trailing spaces
+        const terms = document.getElementById('requirements').value;
+        const outputDiv = document.getElementById('output');
+        const checkButton = document.getElementById('runButton');
+        const customSearchButton = document.getElementById('search');
+
+        
+        urlInputField.addEventListener('input', () => {
+        // Hide other elements when the input changes
+        outputDiv.innerHTML = '';
+        
+       });
+        if (!isValidUrlInput(urlInput)) {
+            // Display an error message when the URL input is invalid
+            outputDiv.innerHTML = '<div class="alert alert-danger" role="alert">Invalid URL input. Please enter a valid URL.</div>';
+        } else {
+            // Valid URL input, proceed with the request
             outputDiv.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>';
             const response = await fetch('http://localhost:3000/run-cypress', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({url,terms})
+                body: JSON.stringify({ url: urlInput, terms })
             });
-            document.getElementById('requirements').style.display='none'
-            document.getElementById('search').style.display='none'
+            document.getElementById('requirements').style.display = 'none';
+            document.getElementById('search').style.display = 'none';
+
             if (response?.ok) {
                 outputDiv.innerHTML = '';
                 document.getElementById('seeResults').style.display = 'block';
             }
+        }
+
+        function isValidUrlInput(input) {
+            // Regular expression to check if the input contains only spaces, numbers, or special characters
+            const regex = /^[0-9\s!@#$%^&*()_+[\]{};:'",.<>?]*$/;
+            return !regex.test(input);
+        }
+
         });
         document.getElementById('search').addEventListener('click',async () =>{
             document.getElementById('requirements').style.display='block'

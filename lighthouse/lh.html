@@ -25,40 +25,26 @@
   <body>
     <div class="container mt-5">
       <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <h2 class="text-center mb-4">LightHouse</h2>
-          <span class="search">
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="textInput"
-                placeholder="Enter URL"
-              />
-          </div>
-              <button id="runButton" onclick="Cons()">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-        </span>
-        <script>
-          // Function to log "Hello" when the button is clicked
-          function Cons() {
-              console.log("Hello");
-          }  
-          // Attach the function to the button's click even
-        </script>
+        <div class="section1">
+            <div class="input-group input-group-small mb-3 input--sec" >
+                <input type="text" class="form-control" id="textInput" placeholder="Enter url" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="runButton1" >GO!</button>
+            </div>
+            <div class="btn-group " role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary btn-md btn--html" id="openButton">HTML Report</button>
+                <button type="button" class="btn btn-primary btn-md btn--dwnld" id="download--json">Download Json</button>
+            </div>
+        </div>
           
-            <span class="output--div" id="output--div">
+            <div class="section2">
+              <div id="errorMessage" >Invalid URL</div>
+              <iframe id="iframe" src="../reports.report.html" frameborder="0" width="600" height="400"></iframe>
               
-              <button id='openButton' class="btn btn-primary btn-lg" >Open HTML Report</button>
-              <button  class="btn btn-primary btn-lg" id="download--json">Download Json</button>
-
               <div class="field--div" id="field--div">
                 <div class="dropdown" id="dropdown">
                   <!-- <label for="fields">Choose a Field:</label> -->
                   <select class="form-select" name="fields" id="fields">
                     <option value="none" selected="selected" >Options </option>
-             
                     <option value="performance">Performance</option>
                     <option value="accessibility">Accessibility</option>
                     <option value="best-practices">Best Practices</option>
@@ -67,13 +53,11 @@
                     <option value="all">ALL</option>
                   </select>
                 </div>
-              </div>
-            </span>
-            
-            <div id="field-output"></div>
-            <div id="output"></div>
+                  <div id="field-output"></div>
+                  <div id="output"></div>
+            </div>
+           </div>
           
-          <div id="errorMessage" style="display:none;">Invalid URL</div>
         </div>
       </div>
     </div>
@@ -82,7 +66,7 @@
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="main.js"></script>
-    <div class="loader-container" id="loaderContainer">
+    <div class="loader-Container" id="loader-Container">
       <div class="loader"></div>
     </div>
   </body>

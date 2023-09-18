@@ -1,0 +1,58 @@
+#urlInput3
+{
+    margin-top: 30px;
+    width: 50%;
+    height:40px;
+}
+
+#checkButton
+{
+    margin-left: 30px;
+}
+#top{
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+  }
+  .input---sec{
+    display: flex;
+    align-items: center;
+    /* margin-right: -200px; */
+  }
+
+#right1
+{
+    display: inline;
+    float: right;
+    margin-right: 100px;
+    margin-bottom: 10px;
+}
+#openUrlButton{
+    display: block ;
+    width: 130px;
+    margin-top: -50px;
+    margin-left: -200px;
+}
+#right2{
+    margin-left: 60%;
+
+}
+.input---sec{
+    display: flex;
+    align-items: center;
+    width: 60%
+  }
+#timeInterval{
+    display: block;
+    margin-top: 20px;
+    height: 45px;
+    width: 290px;
+}
+#start{
+    height: 45px;
+    margin-left:10px;
+    margin-top: -73px;
+}
+#stop{
+    height: 45px;
+ }
