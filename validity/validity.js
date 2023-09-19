@@ -35,7 +35,7 @@ let intervalId;
                     return;
                 }
                 if (/^(?![A-Za-z]+$)[0-9\s!@#$%^&*()_+[\]{};:'",.<>?]*$|\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b|^$/.test(url)) {
-                    resultmessage.innerHTML = '<div class="alert alert-danger" role="alert">Invalid URL input. Please enter a valid URL.</div>';
+                    resultmessage.innerHTML = '<div class="alert alert-danger" style="font-size:16px" role="alert">Invalid URL input. Please enter a valid URL.</div>';
                     // errorMessage.style.display = 'inline-block';
                     return;
                 }

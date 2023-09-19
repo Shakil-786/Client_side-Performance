@@ -692,7 +692,7 @@ body {
   .company
   {
     font-size: 37px !important;
-    margin-left: 40px;
+    margin-left: px;
   }
   
   .menu li
@@ -745,6 +745,9 @@ body {
     margin-top: 100px;
     margin-left: 70px;
     max-width: 400px;
+  }
+  .lighthouse--heading{
+    font-size: 40px;
   }
   .lighthouse--text {
     margin-bottom: -20px;
@@ -845,6 +848,8 @@ body {
     display: flex;
     justify-content: center;
   }
+
+ 
 }
 
 @media only screen and (min-width: 1490px) {
@@ -916,8 +921,8 @@ body {
     margin-top: 70px;
     max-width: 400px;
   }
+ 
   .lighthouse--text {
-    margin-bottom: -20px;
     text-align: left;
   }
   .vline1 {
