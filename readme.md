@@ -5,9 +5,9 @@ In this project we are using three tools:
 
 1. Performance Report Generation: The core functionality of this tool leverages Lighthouse, an open-source automated tool for improving the quality of web pages. By integrating Lighthouse, our project enables users to generate detailed performance reports for web pages. These reports encompass various aspects such as performance, accessibility, best practices, and SEO. Users can quickly identify areas for improvement and take action to enhance their web applications.
 
-2. Local and Session Storage: Our tool provides seamless integration with local and session storage mechanisms. Users can store essential data locally, ensuring the persistence of critical session information across page reloads or browser sessions. This feature is invaluable for applications requiring user state retention, shopping carts, or any scenario where temporary data storage is necessary. 
+2. Local and Session Storage: Our tool provides seamless integration with local and session storage mechanisms. Users can store essential data locally, ensuring the persistence of critical session information across page reloads or browser sessions. This feature is invaluable for applications requiring user state retention, shopping carts, or any scenario where temporary data storage is necessary. It also allow the user to customise the search for local storage and session storage.
 
-3. URL Validity Checker: To maintain data accuracy and avoid errors, our project offers a URL validity checker. Users can verify the correctness of URLs before initiating performance tests or data storage operations. This functionality safeguards against broken links or incorrect inputs, ensuring the accuracy of the generated reports and data integrity.
+3. URL Validity Checker: To maintain data accuracy and avoid errors, our project offers a URL validity checker. Users can verify the correctness of URLs. This functionality safeguards against broken links or incorrect inputs, ensuring the accuracy of the generated reports and data integrity and it also allow to check the URL after the given perticular time automatically and if the URL is down then it will send an email to the admin.
 
 
 
