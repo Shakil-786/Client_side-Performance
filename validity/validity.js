@@ -1,31 +1,49 @@
+
+let email;
+
 let intervalId;
-        document.getElementById('start').addEventListener('click', async () => {
-            document.getElementById('timeInterval').style.visibility='visible'
-            document.getElementById('stop').style.visibility='visible'
-            document.getElementById('start').style.visibility='hidden'
-        })
-        const url = document.getElementById('urlInput3').value;
-        function emailSend() {
-            Email.send({
-                Host: "smtp.elasticemail.com",
-                Username: "annapurna.kg@nineleaps.com",
-                Password: "06EE1C3FCDEAD71B36EC8D21812699DAA31D",
-                To: 'annapurnanayak999@gmail.com',
-                From: "annapurna.kg@nineleaps.com",
-                Subject: "Mail regarding url",
-                Body: "Website is down for now "
-            }).then(
-                message => document.getElementById('resultMessage').innerHTML = 'Link is Invalid. An Email has been sent to the admin.'
-            );
-        }
-        //run the test once user click enter
-        document.getElementById('urlInput3').addEventListener('keyup', (event) => {
+document.getElementById('checkButton').addEventListener('click',async(e)=>{
+
+    e.preventDefault()
+    const response = await fetch('http://localhost:3000/email-read');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            email=data.user_email
+            console.log(email);
+})
+
+document.getElementById('start').addEventListener('click', async () => {
+            
+           
+    document.getElementById('timeInterval').style.visibility='visible'
+    document.getElementById('stop').style.visibility='visible'
+    document.getElementById('start').style.visibility='hidden'
+})
+const url = document.getElementById('urlInput3').value;
+
+function emailSend() {
+    Email.send({
+        Host: "smtp.elasticemail.com",
+        Username: "annapurna.kg@nineleaps.com",
+        Password: "06EE1C3FCDEAD71B36EC8D21812699DAA31D",
+        To: `${email}`,
+        From: "annapurna.kg@nineleaps.com",
+        Subject: "Mail regarding url",
+        Body: "Website is down for now "
+    }).then(
+        message => document.getElementById('resultMessage').innerHTML = 'Link is Invalid. An Email has been sent to the admin.'
+        );
+    }
+    //run the test once user click enter
+    document.getElementById('urlInput3').addEventListener('keyup', (event) => {
         if (event.key === "Enter") {
             document.getElementById('checkButton').click();
         }
-        });
-        document.getElementById('checkButton').addEventListener('click', async () => {
-            console.log("clicked")
+    });
+    document.getElementById('checkButton').addEventListener('click', async () => {     
+        console.log("clicked")
             async function rerun() {
                 const url = document.getElementById('urlInput3').value;
                 const resultmessage=document.getElementById('resultMessage');
@@ -57,8 +75,10 @@ let intervalId;
                     document.getElementById('resultMessage').innerHTML = textContent;
                     document.getElementById('openUrlButton').style.visibility='visible';
                 } else {
+                    // if(localStorage.length>0){
                     emailSend()
                     document.getElementById('openUrlButton').style.visibility='hidden';
+                // }
                 }
             }
             rerun()

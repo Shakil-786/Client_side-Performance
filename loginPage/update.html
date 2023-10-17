@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Update</title>
+    <link rel="stylesheet" href="update.css">
+</head>
+<body>
+    <div class="password-update-form">
+        <h1>Password Update</h1>
+        <form id="updateForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <button type="button" id="nextButton" class="btn btn-primary">Next</button>
+            <div class="password-fields">
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label">New Password</label>
+                    <input type="password" class="form-control" id="newPassword" >
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" required >
+                </div>
+            </div>
+            <button type="submit" id="updateButton" class="btn btn-primary">Update Password</button>
+        </form>
+         <div id="message"></div> <!-- Message box container -->
+    </div>
+    </div>
+    
+    <script src="./update.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>

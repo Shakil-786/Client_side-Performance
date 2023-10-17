@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 12px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+h1 {
+    text-align: center;
+    color: #852f2f;
+    margin-bottom: 20px;
+    /* Add some margin below the heading */
+}
+
+h7 {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+#sign {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#sign:hover {
+    text-decoration: underline;
+}
+
+form {
+    background-color: hwb(0 100% 0%);
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: #914545;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #883333;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type="submit"],
+button[type="update"] {
+    background-color: #974c4c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button[type="submit"]:hover,
+button[type="update"]:hover {
+    background-color: #0056b3;
+}
+
+#message {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+    font-weight: bold;
+}

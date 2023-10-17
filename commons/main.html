@@ -22,6 +22,19 @@
         <li><a  onclick="openAccordion(1)" style="cursor: pointer;">Lighthouse</a></li>
         <li><a  onclick="openAccordion(2)" style="cursor: pointer;">Security</a></li>
         <li><a  onclick="openAccordion(3)" style="cursor: pointer;">Validity</a></li>
+        <!-- <li id="logout" style="cursor: pointer;">Logout</li> -->
+        <li id="login" style="display: none;" style="cursor:auto">Login
+          </li>
+        
+        <li>
+         <div class="dropdown">
+           <select id="dropdown" name="dropdown">
+            <option>Actions</option>
+            <option value="option1">Change Password</option>
+            <option value="option2">Log out</option>
+        </select>
+    </div>
+    </li>
       </ul>
     </section>
     <div class="section1">
@@ -106,8 +119,16 @@
       //   });
     </script>
     <script>
+      if(localStorage.length>0){
        function openAccordion(itemNumber) {
             window.location.href = `test.html?section=${itemNumber}`;
+        }}
+        else{
+          document.getElementById('dropdown').style.display='none'
+          document.getElementById('login').style.display='block'
+          document.getElementById('login').addEventListener('click',async()=>{
+            window.location.href='../loginPage/login.html'
+          })
         }
       // Function to handle the click event on navigation links
       // function handleNavLinkClick(event) {
@@ -133,6 +154,7 @@
         <script>
           document.write(new Date().getFullYear());
         </script>
+        <script src="../loginPage/logout.js"></script>
         Nineleaps. All Rights Reserved.</small
       >
     </footer>
