@@ -110,7 +110,7 @@ console.log('File updated successfully.');
 
     writeFileSync(envFilePath, updatedEnvFileContent);
 
-    const cypressCommand = `npx cypress open`;
+    const cypressCommand = `npx cypress run`;
     
     exec(cypressCommand, (error, stdout, stderr) => {
         if (error) {
